@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import ColorBox from './components/ColorBox';
+import ColorBoxes from './components/ColorBoxes';
 
 class App extends Component {
   render() {
     return (
-      <ColorBox color="goldenrod"/>
+      <ColorBoxes/>
     );
   }
 }
