@@ -1,0 +1,10 @@
+.ColorBoxes {
+  margin: 0 auto;
+  height: 100%;
+  width: 80vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}

@@ -1,4 +1,8 @@
 .ColorBox {
+  margin: .7rem;
   height: 10rem;
   width: 10rem;
+  display: inline-block;
+
+  border: .1rem solid black;
 }
