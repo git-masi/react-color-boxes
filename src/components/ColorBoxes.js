@@ -63,9 +63,13 @@ class ColorBoxes extends Component {
 
   render() {
     return (
-      <div className="ColorBoxes">
-        {this.renderBoxes()}
-      </div>
+      <Fragment>
+        <h1 className="heading">Colorful React Boxes</h1>
+        <h4 className="subheading">Click to change color</h4>
+        <div className="ColorBoxes">
+          {this.renderBoxes()}
+        </div>
+      </Fragment>
     )
   }
 }
