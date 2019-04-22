@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './ColorBoxes.css';
 import ColorBox from './ColorBox';
-  
+
 class ColorBoxes extends Component {
   constructor() {
     super();
@@ -14,12 +14,13 @@ class ColorBoxes extends Component {
     this.initBoxes = this.initBoxes.bind(this);
     this.makeBoxes = this.makeBoxes.bind(this);
     this.renderBoxes = this.renderBoxes.bind(this);
+    this.boxClickHandler = this.boxClickHandler.bind(this);
   }
 
   initBoxes = function() {
     const oldState = {...this.state};
     for (let i = 0; i < this.state.numBoxes; i++) {
-      oldState.boxes.push({color: `${this.randomColor()}`, id: (Math.floor(Math.random() * 1000)), key: `box${(Math.floor(Math.random() * 1000))}`})
+      oldState.boxes.push({color: `${this.randomColor()}`, id: (Math.floor(Math.random() * 10000)), key: `box${(Math.floor(Math.random() * 1000))}`})
     }
   }
 
@@ -37,9 +38,8 @@ class ColorBoxes extends Component {
   }
   
   makeBoxes = function() {
-
     const boxesJSXArr = this.state.boxes.map(el => {
-      return <ColorBox color={el.color} id={el.id} key={el.key}/>
+      return <ColorBox color={el.color} id={el.id} key={el.key} click={this.boxClickHandler}/>
     })
     return (
       <Fragment>
@@ -52,6 +52,11 @@ class ColorBoxes extends Component {
     if (this.state.boxes.length === 0) this.initBoxes();
     const newBoxes = this.makeBoxes();
     return newBoxes;
+  }
+
+  boxClickHandler = function (e) {
+    let targetID = e.target.id;
+    console.log(targetID);
   }
 
   render() {
