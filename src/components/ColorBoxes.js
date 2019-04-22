@@ -6,8 +6,9 @@ class ColorBoxes extends Component {
   constructor() {
     super();
     this.state = {
-      baseColors: ['hsl(158, 55%, 78%)', 'hsl(83, 55%, 84%)', '	hsl(24, 100%, 86%)', 'hsl(3, 100%, 82%)', 'hsl(355, 100%, 77%)'],
+      baseColors: ['hsl(158, 55%, 78%)', 'hsl(83, 55%, 84%)', 'hsl(24, 100%, 86%)', 'hsl(3, 100%, 82%)', 'hsl(355, 100%, 77%)'],
       numBoxes: 16,
+      // boxes is an array of nested objects
       boxes: []
     }
     this.randomColor = this.randomColor.bind(this);
@@ -20,21 +21,12 @@ class ColorBoxes extends Component {
   initBoxes = function() {
     const oldState = {...this.state};
     for (let i = 0; i < this.state.numBoxes; i++) {
-      oldState.boxes.push({color: `${this.randomColor()}`, id: (Math.floor(Math.random() * 10000)), key: `box${(Math.floor(Math.random() * 1000))}`})
+      oldState.boxes.push({color: `${this.randomColor()}`, id: (Math.floor(Math.random() * 10000)), key: `box${(Math.floor(Math.random() * 10000))}`})
     }
   }
 
   randomColor = function() {
     return this.state.baseColors[(Math.floor(Math.random() * this.state.baseColors.length))];
-  }
-
-  randomizeArr = function(arr) {
-    let output = [];
-    while (output.length < arr.length) {
-      let index = arr[Math.floor(Math.random() * arr.length)];
-      if (output.indexOf(index) === -1) output.push(index);
-    }
-    return output;
   }
   
   makeBoxes = function() {
@@ -55,15 +47,23 @@ class ColorBoxes extends Component {
   }
 
   boxClickHandler = function (e) {
-    let targetID = e.target.id;
-    console.log(targetID);
+    let targetID = Number(e.target.id);
+    let updateState = [...this.state.boxes];
+    for (let box of updateState) {
+      if (box.id === targetID) {
+        let newColor = this.randomColor();
+        while (newColor === box.color) {
+          newColor = this.randomColor();
+        }
+        box.color = newColor;
+      }
+    }
+    this.setState({boxes: updateState})
   }
 
   render() {
     return (
       <div className="ColorBoxes">
-        {/* {this.initBoxes()} */}
-        {/* {this.makeBoxes()} */}
         {this.renderBoxes()}
       </div>
     )
